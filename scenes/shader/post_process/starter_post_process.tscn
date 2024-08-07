@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnd124bxoqpg2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_wupyr"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+mesh = SubResource("QuadMesh_wupyr")
+skeleton = NodePath("../..")
