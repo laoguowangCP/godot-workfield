@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bdc672y1qpikl"
+path="res://.godot/imported/compute.task.glsl-3c03fd47d2ea5d8d8e0ce79a8884f703.res"
+
+[deps]
+
+source_file="res://scenes/shader/computer_shader/compute.task.glsl"
+dest_files=["res://.godot/imported/compute.task.glsl-3c03fd47d2ea5d8d8e0ce79a8884f703.res"]
+
+[params]
+
