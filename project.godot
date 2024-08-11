@@ -22,3 +22,7 @@ window/size/viewport_height=90
 [dotnet]
 
 project/assembly_name="Playground"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/statechart_sharp/plugin.cfg")

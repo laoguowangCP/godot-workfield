@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c1c2qou15s8ug"]
 
-[ext_resource type="Script" path="res://scenes/node_duplicate/TestNodeDuplicate.cs" id="1_xlbst"]
+[ext_resource type="Script" path="res://node_behavior/node_duplicate/TestNodeDuplicate.cs" id="1_xlbst"]
 
 [node name="NodeDuplicate" type="Node"]
 script = ExtResource("1_xlbst")
