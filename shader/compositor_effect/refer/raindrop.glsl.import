@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://cjfqxxx0sdlul"
+path="res://.godot/imported/raindrop.glsl-13a076e445da1215bf6d8f83ee3d2456.res"
+
+[deps]
+
+source_file="res://shader/compositor_effect/refer/raindrop.glsl"
+dest_files=["res://.godot/imported/raindrop.glsl-13a076e445da1215bf6d8f83ee3d2456.res"]
+
+[params]
+
