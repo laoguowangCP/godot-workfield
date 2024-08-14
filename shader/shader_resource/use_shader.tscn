@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhkaaypw7mysm"]
+
+[ext_resource type="Shader" path="res://shader/shader_resource/new_shader.gdshader" id="1_2kyty"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_ddmyj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oewjs"]
+render_priority = 0
+shader = ExtResource("1_2kyty")
+shader_parameter/albedo = SubResource("ImageTexture_ddmyj")
+
+[node name="UseShader" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material = SubResource("ShaderMaterial_oewjs")
