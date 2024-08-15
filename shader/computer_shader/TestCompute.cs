@@ -9,7 +9,7 @@ public partial class TestCompute : Node3D
 	{
 		// Create compute shader
 		RenderingDevice rd = RenderingServer.CreateLocalRenderingDevice();
-		RDShaderFile shaderFile = GD.Load<RDShaderFile>("res://scenes/shader/computer_shader/compute.comp.glsl");
+		RDShaderFile shaderFile = GD.Load<RDShaderFile>("res://shader/computer_shader/compute.comp.glsl");
 		RDShaderSpirV shaderSpirV = shaderFile.GetSpirV();
 		Rid shaderRid = rd.ShaderCreateFromSpirV(shaderSpirV);
 

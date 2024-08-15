@@ -8,10 +8,10 @@ public partial class TestRand : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		PCG32Fast pcgFast = new PCG32Fast();
-		foreach(var x in Enumerable.Range(0, 100))
+		PCG32 pcgFast = new();
+		foreach(var x in Enumerable.Range(0, 1000))
 		{
-			GD.Print(Randy.NextSingle(pcgFast));
+			GD.Print(Randy.NextDouble01(pcgFast));
 		}
 	}
 
