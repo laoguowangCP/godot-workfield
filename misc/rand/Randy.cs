@@ -1,8 +1,10 @@
 using System;
-using System.Dynamic;
 
 
-namespace LGWCP.Randy;
+namespace LGWCP.Util.Randy;
+
+
+#region randy
 
 public class Randy
 {
@@ -42,7 +44,14 @@ public class Randy
         var ratio = rng.Next() * UIntToDouble;
         return (1-ratio) * floor + ratio * ceil;
     }
+
+    public static bool NextBool(IRNG32 rng)
+    {
+        return rng.Next() % 2 == 1;
+    }
 }
+
+#endregion
 
 
 #region rng interface
@@ -52,9 +61,10 @@ public interface IRNG32
     public UInt32 Next();
 }
 
-public interface IRNG64
+public interface IRNGStateful
 {
-    public UInt64 Next();
+    public UInt64 GetRNGState();
+    public void SetRNGState(UInt64 state);
 }
 
 #endregion
@@ -62,9 +72,10 @@ public interface IRNG64
 
 #region pcg32fast
 
-public class PCG32Fast : IRNG32
+public class PCG32Fast : IRNG32, IRNGStateful
 {
-    protected const UInt64 mul = 636_4136_2238_4679_3005UL;
+    protected const UInt64 mul = 6364136223846793005UL;
+    protected const UInt64 inc = 1442695040888963407UL;
 
     protected UInt64 _state;
 
@@ -80,8 +91,8 @@ public class PCG32Fast : IRNG32
 
     public PCG32Fast(int seed = 0)
     {
-        // seed is modified to ord
-        _state = (ulong)seed << 1 | 1;
+        // seed is modified to odd
+        _state = ((UInt64)seed << 1) + inc;
     }
 
     public UInt32 Next()
@@ -96,9 +107,14 @@ public class PCG32Fast : IRNG32
         }
     }
 
-    public void GetRNGSnapshot(out UInt64 state)
+    public UInt64 GetRNGState()
     {
-        state = _state;
+        return _state;
+    }
+
+    public void SetRNGState(UInt64 state)
+    {
+        _state = state;
     }
 }
 
@@ -107,8 +123,9 @@ public class PCG32Fast : IRNG32
 
 #region pcg32
 
-public class PCG32 : IRNG32
+public class PCG32 : IRNG32, IRNGStateful
 {
+    // PCG-XSH-RR with 64-bit state and 32-bit output
     protected const UInt64 mul = 6364136223846793005UL;
     protected const UInt64 inc = 1442695040888963407UL;
 
@@ -138,9 +155,14 @@ public class PCG32 : IRNG32
         }
     }
 
-    public void GetRNGSnapshot(out UInt64 state)
+    public UInt64 GetRNGState()
     {
-        state = _state;
+        return _state;
+    }
+
+    public void SetRNGState(UInt64 state)
+    {
+        _state = state;
     }
 }
 
