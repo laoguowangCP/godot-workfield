@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bnlbj1otwgy5h"]
+
+[node name="Sprite3dSampling" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture_filter = 0

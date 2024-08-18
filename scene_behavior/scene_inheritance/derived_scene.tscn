@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://jyujktvdef34"]
 
-[ext_resource type="PackedScene" uid="uid://dxdn1yvbhxryu" path="res://scene_hehavior/scene_inheritance/base_scene.tscn" id="1_x5ajb"]
+[ext_resource type="PackedScene" uid="uid://dxdn1yvbhxryu" path="res://scene_behavior/scene_inheritance/base_scene.tscn" id="1_x5ajb"]
 
 [node name="DerivedScene" instance=ExtResource("1_x5ajb")]
 

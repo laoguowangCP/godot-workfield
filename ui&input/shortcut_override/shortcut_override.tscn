@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb4101b5nr1wc"]
+
+[ext_resource type="Script" path="res://ui&input/shortcut_override/ShiftScrollUp.cs" id="1_jkdxj"]
+[ext_resource type="Script" path="res://ui&input/shortcut_override/ScrollUp.cs" id="2_k13ss"]
+
+[node name="ShortcutOverride" type="Node2D"]
+
+[node name="ShiftScrollUp" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_jkdxj")
+
+[node name="ScrollUp" type="Control" parent="ShiftScrollUp"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_k13ss")
