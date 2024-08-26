@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace LGWCP.Inventory;
 
-public partial class Inventory : IInventory<Node>
+public partial class Inventory
 {
 	[Export] protected int MaxSlotLength = 5;
 	[Export] protected bool IsLastSlotHangable = true;
