@@ -5,6 +5,7 @@ extends Node
 func _ready() -> void:
 	var n = weakref(RefCounted.new())
 	var n1 = n.get_ref()
+	print(n.get_reference_count())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
