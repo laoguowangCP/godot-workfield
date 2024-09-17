@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b034082kpbjyc"]
+
+[node name="ToBeInstantiated" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="mouse_entered" from="Control/Panel" to="Control" method="hide"]
