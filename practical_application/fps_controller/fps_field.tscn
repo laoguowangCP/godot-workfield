@@ -64,6 +64,10 @@ material = ExtResource("2_8odmm")
 script = ExtResource("3_6wr2p")
 FpsController = NodePath("../FpsController")
 
+[node name="BobCam" type="Camera3D" parent="CameraManager"]
+current = true
+fov = 45.0
+
 [node name="BobCamRigid" type="RigidBody3D" parent="CameraManager"]
 collision_layer = 0
 collision_mask = 0
@@ -72,7 +76,6 @@ gravity_scale = 0.0
 continuous_cd = true
 
 [node name="BobCam" type="Camera3D" parent="CameraManager/BobCamRigid"]
-current = true
 fov = 45.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/BobCamRigid"]

@@ -5,7 +5,7 @@ using LGWCP.StatechartSharp;
 public partial class TestStatechartDuctFree : Node
 {
     protected Statechart Statechart;
-    protected StatechartDuct duct;
+    protected StatechartDuct Duct;
     public override void _Ready()
     {
         Statechart = new()
@@ -16,7 +16,7 @@ public partial class TestStatechartDuctFree : Node
         };
 
         AddChild(Statechart);
-        duct = Statechart.Duct;
+        Duct = Statechart.Duct;
     }
 
     public override void _Process(double delta)
@@ -28,9 +28,9 @@ public partial class TestStatechartDuctFree : Node
             Statechart = null;
         }
 
-        if (duct is not null)
+        if (Duct is not null)
         {
-            GD.Print(duct);
+            GD.Print(Duct, Duct.GetReferenceCount());
         }
     }
 }

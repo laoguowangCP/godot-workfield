@@ -17,7 +17,6 @@ length = 0.21
 
 [node name="FpsController" type="CharacterBody3D" node_paths=PackedStringArray("CamJointTarget")]
 script = ExtResource("1_ug2ur")
-JumpVelocity = 5.0
 CamJointTarget = NodePath("Neck/Head/CamJointTarget")
 
 [node name="Neck" type="Node3D" parent="."]
@@ -48,7 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 shape = SubResource("CapsuleShape3D_avovv")
 
 [node name="FeetShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.21, 0)
 shape = SubResource("SeparationRayShape3D_8c7a1")
 
 [node name="Statechart" type="Node" parent="."]

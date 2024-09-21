@@ -8,7 +8,7 @@ namespace LGWCP.Util.Randy;
 
 public class Randy
 {
-    const double UIntToDouble = 1.0 / 42_9496_7296.0;
+    const double UIntToDouble01 = 1.0 / 42_9496_7296.0;
 
     public static int NextInt(IRNG32 rng)
     {
@@ -23,25 +23,25 @@ public class Randy
 
     public static float NextSingle01(IRNG32 rng)
     {
-        return (float)(rng.Next() * UIntToDouble);
+        return (float)(rng.Next() * UIntToDouble01);
     }
 
     public static float NextSingle(IRNG32 rng, float floor, float ceil)
     {
         // floor >= ceil
-        var ratio = (float)(rng.Next() * UIntToDouble);
+        var ratio = (float)(rng.Next() * UIntToDouble01);
         return (1-ratio) * floor + ratio * ceil;
     }
 
     public static double NextDouble01(IRNG32 rng)
     {
-        return rng.Next() * UIntToDouble;
+        return rng.Next() * UIntToDouble01;
     }
 
     public static double NextDouble(IRNG32 rng, double floor, double ceil)
     {
         // floor >= ceil
-        var ratio = rng.Next() * UIntToDouble;
+        var ratio = rng.Next() * UIntToDouble01;
         return (1-ratio) * floor + ratio * ceil;
     }
 

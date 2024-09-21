@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using LGWCP.StatechartSharp;
+using LGWCP.Godot.Util.Mathy;
 
 namespace LGWCP.WorkField.FpsController;
 
@@ -13,7 +14,7 @@ public partial class FpsController : CharacterBody3D
     [Export] protected float CamMaxPitch = 87.0f;
     [Export] protected float ForwardRatio = 1.25f;
     [Export] protected float BackwardRatio = 0.75f;
-    [Export] protected float JumpVelocity = 4.0f;
+    [Export] protected float JumpVelocity = 5.0f;
     [Export] public PhysicsBody3D CamJointTarget { get; protected set; }
     
     protected Node3D Neck;
