@@ -7,7 +7,7 @@ namespace LGWCP.Godot.Util.Mathy;
 
 /*
 
-Fast approximated math lib, dedicated for godot.
+Math lib dedicated for godot. Helper functions for vector, and many fastapprox algorithm.
 "Kinda math, but not so math."
 
 */
@@ -16,6 +16,7 @@ Fast approximated math lib, dedicated for godot.
 
 public class Mathy
 {
+	#region FastApprox
 	public const float SMALL_NUMBER = 1e-8f;
 	public const float PI = 3.1415926535897932f;
 	public const float PI_INV = 0.3183098861837907f;
@@ -142,11 +143,36 @@ public class Mathy
 		(s, c) = MathF.SinCos(rad);
 	}
 
+	#endregion
+
+
+	#region Helper
+
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static float Square(float x)
 	{
 		return x*x;
 	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static float Sqrt(float v)
+	{
+		return MathF.Sqrt(v);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static Vector2 Sqrt(Vector2 v)
+	{
+		return new Vector2(MathF.Sqrt(v.X), MathF.Sqrt(v.Y));
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static Vector3 Sqrt(Vector3 v)
+	{
+		return new Vector3(MathF.Sqrt(v.X), MathF.Sqrt(v.Y), MathF.Sqrt(v.Z));
+	}
+
+	#endregion
 }
 
 #endregion
@@ -160,7 +186,6 @@ SpringDamp helper classes, minimize calculation cost
 
 public class SpringDamper
 {
-	protected DampStepper Stepper;
 	protected class DampStepper
 	{
 		protected float Damping;
@@ -344,14 +369,17 @@ public class SpringDamper
 			currentVel = (c2 - c1 * W - c2 * (W * deltaTime)) * e;
 		}
 	}
+
+	// public virtual void Step(ref float current, ref float currentVel, float target, float targetVel, float deltaTime) {}
 }
 
 public class SpringDamperF : SpringDamper
 {
+	protected DampStepper Stepper;
 	public SpringDamperF(float damping, float stiff)
 	{
 		var stiffSqrt = MathF.Sqrt(stiff);
-		var stiffSqrtInv = 1f / stiff;
+		var stiffSqrtInv = 1f / stiffSqrt;
 		var w = stiffSqrt * Mathy.PI_TWO;
 		var wInv = stiffSqrtInv * Mathy.PI_INV * 0.5f;
 
@@ -392,5 +420,111 @@ public class SpringDamperF : SpringDamper
 		Stepper.Step(ref current, ref currentVel, target, targetVel, deltaTime);
     }
 }
+
+public class SpringDamperV2 : SpringDamper
+{
+	protected DampStepper[] Steppers = new DampStepper[2];
+	public SpringDamperV2(Vector2 damping, Vector2 stiff)
+	{
+		var stiffSqrt = Mathy.Sqrt(stiff);
+		var stiffSqrtInv = Vector2.One / stiff;
+		var w = stiffSqrt * Mathy.PI_TWO;
+		var wInv = stiffSqrtInv * Mathy.PI_INV * 0.5f;
+
+		for (int i = 0; i < Steppers.Length; ++i)
+		{
+			if (w[i] < Mathy.SMALL_NUMBER)
+			{
+				Steppers[i] = new DampStepperSmallW(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] < Mathy.SMALL_NUMBER)
+			{
+				Steppers[i] = new DampStepperSmallDamping(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] > 1.0f)
+			{
+				Steppers[i] = new DampStepperOverDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] < 1.0f)
+			{
+				Steppers[i] = new DampStepperUnderDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else // damping == 1.0f
+			{
+				Steppers[i] = new DampStepperCriticalDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+		}
+	}
+
+	public void Step(
+        ref Vector2 current,
+        ref Vector2 currentVel,
+        Vector2 target,
+        Vector2 targetVel,
+        float deltaTime)
+    {
+        if (deltaTime <= 0.0f)
+		{
+			return;
+		}
+
+		Steppers[0].Step(ref current.X, ref currentVel.X, target.X, targetVel.X, deltaTime);
+		Steppers[1].Step(ref current.Y, ref currentVel.Y, target.Y, targetVel.Y, deltaTime);
+    }
+}
+
+public class SpringDamperV3 : SpringDamper
+{
+	protected DampStepper[] Steppers = new DampStepper[3];
+	public SpringDamperV3(Vector3 damping, Vector3 stiff)
+	{
+		var stiffSqrt = Mathy.Sqrt(stiff);
+		var stiffSqrtInv = Vector3.One / stiff;
+		var w = stiffSqrt * Mathy.PI_TWO;
+		var wInv = stiffSqrtInv * Mathy.PI_INV * 0.5f;
+
+		for (int i = 0; i < Steppers.Length; ++i)
+		{
+			if (w[i] < Mathy.SMALL_NUMBER)
+			{
+				Steppers[i] = new DampStepperSmallW(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] < Mathy.SMALL_NUMBER)
+			{
+				Steppers[i] = new DampStepperSmallDamping(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] > 1.0f)
+			{
+				Steppers[i] = new DampStepperOverDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] < 1.0f)
+			{
+				Steppers[i] = new DampStepperUnderDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else // damping == 1.0f
+			{
+				Steppers[i] = new DampStepperCriticalDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+		}
+	}
+
+	public void Step(
+        ref Vector3 current,
+        ref Vector3 currentVel,
+        Vector3 target,
+        Vector3 targetVel,
+        float deltaTime)
+    {
+        if (deltaTime <= 0.0f)
+		{
+			return;
+		}
+
+		Steppers[0].Step(ref current.X, ref currentVel.X, target.X, targetVel.X, deltaTime);
+		Steppers[1].Step(ref current.Y, ref currentVel.Y, target.Y, targetVel.Y, deltaTime);
+		Steppers[2].Step(ref current.Z, ref currentVel.Z, target.Z, targetVel.Z, deltaTime);
+    }
+}
+
 
 #endregion

@@ -11,15 +11,18 @@ public partial class CameraManager : Node
     protected Generic6DofJoint3D BobCamJoint;
 
     protected PhysicsBody3D BobCamJointTarget;
-    protected Vector3 CamDampVel;
+    protected Vector3 CamDampPosVel = new();
+    protected Vector3 CamDampRotVel = new();
     protected Camera3D BobCam;
-    protected SpringDamperF SpringDamper;
+    protected SpringDamperV3 SD3Pos;
 
     public override void _Ready()
     {
         // ConfigBobCamJoint();
         ConfigBobCamCustomDamp();
-        SpringDamper = new SpringDamperF(0.5f, 16f);
+        SD3Pos = new SpringDamperV3(
+            new Vector3(0.5f, 0.5f, 0.5f),
+            new Vector3(16f, 16f, 16f));
     }
 
     public override void _PhysicsProcess(double delta)
@@ -43,14 +46,15 @@ public partial class CameraManager : Node
             deltaTime);
         */
         
-        SpringDamper.Step(
-            ref currentPos.Y,
-            ref CamDampVel.Y,
-            BobCamJointTarget.GlobalPosition.Y,
-            FpsController.Velocity.Y, // 0f,
+        SD3Pos.Step(
+            ref currentPos,
+            ref CamDampPosVel,
+            BobCamJointTarget.GlobalPosition,
+            FpsController.Velocity, // 0f,
             deltaTime);
 
         BobCam.GlobalPosition = currentPos;
+        GD.Print(FpsController.Quaternion);
     }
 
     protected void ConfigBobCamJoint()
@@ -69,7 +73,7 @@ public partial class CameraManager : Node
     {
         BobCam = GetNodeOrNull<Camera3D>("BobCam");
         BobCamJointTarget = FpsController.CamJointTarget;
-        CamDampVel = new Vector3();
+        CamDampPosVel = new Vector3();
         BobCam.GlobalPosition = BobCamJointTarget.GlobalPosition;
     }
 }
