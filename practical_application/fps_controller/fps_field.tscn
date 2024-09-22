@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx0iso5q807a1"]
+[gd_scene load_steps=7 format=3 uid="uid://bx0iso5q807a1"]
 
 [ext_resource type="PackedScene" uid="uid://ck6wsop787uon" path="res://practical_application/fps_controller/fps_controller.tscn" id="1_iud0o"]
 [ext_resource type="Material" uid="uid://c70asd0ua6snx" path="res://practical_application/fps_controller/material/block_basic_tex_triplanar.tres" id="2_8odmm"]
@@ -17,9 +17,6 @@ ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 sdfgi_read_sky_light = false
 sdfgi_y_scale = 2
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_f0fai"]
-radius = 0.2
 
 [node name="FpsField" type="Node3D"]
 
@@ -60,37 +57,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 use_collision = true
 material = ExtResource("2_8odmm")
 
-[node name="CameraManager" type="Node" parent="." node_paths=PackedStringArray("FpsController")]
+[node name="CameraManager" type="Node" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("3_6wr2p")
-FpsController = NodePath("../FpsController")
+Player = NodePath("../FpsController")
 
 [node name="BobCam" type="Camera3D" parent="CameraManager"]
+top_level = true
 current = true
-fov = 45.0
-
-[node name="BobCamRigid" type="RigidBody3D" parent="CameraManager"]
-collision_layer = 0
-collision_mask = 0
-mass = 100.0
-gravity_scale = 0.0
-continuous_cd = true
-
-[node name="BobCam" type="Camera3D" parent="CameraManager/BobCamRigid"]
-fov = 45.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraManager/BobCamRigid"]
-shape = SubResource("SphereShape3D_f0fai")
-
-[node name="BobCamJoint" type="Generic6DOFJoint3D" parent="CameraManager"]
-linear_limit_x/softness = 0.05
-linear_limit_x/restitution = 0.2
-linear_limit_x/damping = 0.25
-linear_limit_y/softness = 0.05
-linear_limit_y/restitution = 0.1
-linear_limit_y/damping = 0.2
-linear_limit_z/softness = 0.05
-linear_limit_z/restitution = 0.2
-linear_limit_z/damping = 0.5
-linear_spring_x/enabled = true
-linear_spring_y/enabled = true
-linear_spring_z/enabled = true

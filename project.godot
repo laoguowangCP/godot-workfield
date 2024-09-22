@@ -14,11 +14,6 @@ config/name="godot-workfield"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
-
-window/size/viewport_width=800
-window/size/viewport_height=450
-
 [dotnet]
 
 project/assembly_name="Playground"

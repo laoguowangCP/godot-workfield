@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck6wsop787uon"]
+[gd_scene load_steps=8 format=3 uid="uid://ck6wsop787uon"]
 
 [ext_resource type="Script" path="res://practical_application/fps_controller/script/TestStatechartDuctFree.cs" id="1_odd5a"]
 [ext_resource type="Script" path="res://practical_application/fps_controller/script/FpsController.cs" id="1_ug2ur"]
 [ext_resource type="Script" path="res://addons/statechart_sharp/node/Statechart.cs" id="3_3rahj"]
 [ext_resource type="Script" path="res://addons/statechart_sharp/node/State.cs" id="4_pkbqc"]
 [ext_resource type="Script" path="res://addons/statechart_sharp/node/Reaction.cs" id="5_e7abo"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_bjkf2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_avovv"]
 radius = 0.4
@@ -15,9 +13,8 @@ height = 1.5
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_8c7a1"]
 length = 0.21
 
-[node name="FpsController" type="CharacterBody3D" node_paths=PackedStringArray("CamJointTarget")]
+[node name="FpsController" type="CharacterBody3D"]
 script = ExtResource("1_ug2ur")
-CamJointTarget = NodePath("Neck/Head/CamJointTarget")
 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -28,19 +25,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 current = true
 fov = 45.0
-
-[node name="CamJointTarget" type="StaticBody3D" parent="Neck/Head"]
-collision_layer = 0
-collision_mask = 0
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neck/Head/CamJointTarget"]
-shape = SubResource("SphereShape3D_bjkf2")
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)

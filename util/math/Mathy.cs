@@ -17,7 +17,8 @@ Math lib dedicated for godot. Helper functions for vector, and many fastapprox a
 public class Mathy
 {
 	#region FastApprox
-	public const float SMALL_NUMBER = 1e-8f;
+	public const float EPSILON = 1e-6f;
+	/*
 	public const float PI = 3.1415926535897932f;
 	public const float PI_INV = 0.3183098861837907f;
 	public const float PI_HALF = 1.5707963267948966f;
@@ -26,6 +27,15 @@ public class Mathy
 	public const float PI_SQ_INV = 0.10132118364233778f;
 	public const float PI_SQRT = 1.7724538509055159f;
 	public const float PI_SQRT_INV = 0.5641895835477563f;
+	*/
+	public const float PI = Mathf.Pi;
+	public const float PI_INV = 1f / PI;
+	public const float PI_HALF = PI / 2f;
+	public const float PI_TWO = PI * 2f;
+	public const float PI_SQ = PI * PI;
+	public const float PI_SQ_INV = 1f / PI_SQ;
+	public const float PI_SQRT = 1.7724539f;
+	public const float PI_SQRT_INV = 1f / PI_SQRT;
 
     public static void SpringDamp(
         ref float current,
@@ -45,12 +55,12 @@ public class Mathy
 		float w = stiffSqrt * PI_TWO;
 		float wInv = stiffSqrtInv * PI_INV * 0.5f;
 		// Handle special cases
-		if (w < SMALL_NUMBER) // no strength which means no damping either
+		if (w < EPSILON) // no strength which means no damping either
 		{
 			current += currentVel * deltaTime;
 			return;
 		}
-		else if (damping < SMALL_NUMBER) // No damping at all
+		else if (damping < EPSILON) // No damping at all
 		{
 			float err = current - target;
 			float b = currentVel * wInv;
@@ -170,6 +180,72 @@ public class Mathy
 	public static Vector3 Sqrt(Vector3 v)
 	{
 		return new Vector3(MathF.Sqrt(v.X), MathF.Sqrt(v.Y), MathF.Sqrt(v.Z));
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static Quaternion Sqrt(Quaternion v)
+	{
+		return new Quaternion(MathF.Sqrt(v.X), MathF.Sqrt(v.Y), MathF.Sqrt(v.Z), MathF.Sqrt(v.W));
+	}
+
+	public static readonly Quaternion QuaternionZero = new Quaternion(0f, 0f, 0f, 0f);
+
+	// Modify local rotation rad to (-pi, pi), during continuous calculation
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static void RotModifierRad(ref float r)
+	{
+		r += (r > PI-EPSILON) ? -PI_TWO+2*EPSILON : (r < -PI+EPSILON) ? PI_TWO-2*EPSILON : 0f;
+	}
+
+	// Minimal degree delta between 2 angle (-180~180)
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static float DeltaDegree(float current, float target)
+	{
+		float delta = target - current;
+		delta += (delta > 180f) ? -360f : (delta < -180f) ? 360f : 0f;
+		return delta;
+	}
+
+	// Minimal rad delta between 2 angle (-pi~pi)
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static float DeltaRad(float current, float target)
+	{
+		float delta = target - current;
+		/*
+		goal: keep delta in (-PI_real, PI_real)
+		since:
+			PI > PI_real
+			PI-EP < PI_real
+			d > 0
+		delta = PI-EP:
+			PI-EP < PI_real
+		delta = PI-EP+d:
+			case 1: PI-EP+d <= PI_real
+				PI-EP+d-2PI+2Ep = -PI+EP+d > -PI+EP > -PI_Real
+			case 2: PI-EP+d > PI_real
+				PI-EP+d-2PI+2Ep = -PI+EP+d > -PI+EP > -PI_real
+		*/
+		delta += (delta > PI-EPSILON) ? -PI_TWO+2*EPSILON : (delta < -PI+EPSILON) ? PI_TWO-2*EPSILON : 0f;
+		return delta;
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static Vector2 DeltaRad(Vector2 current, Vector2 target)
+	{
+		Vector2 delta = target - current;
+		delta.X += (delta.X > PI-EPSILON) ? -PI_TWO+2*EPSILON : (delta.X < -PI+EPSILON) ? PI_TWO-2*EPSILON : 0f;
+		delta.Y += (delta.Y > PI-EPSILON) ? -PI_TWO+2*EPSILON : (delta.Y < -PI+EPSILON) ? PI_TWO-2*EPSILON : 0f;
+		return delta;
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static Vector3 DeltaRad(Vector3 current, Vector3 target)
+	{
+		Vector3 delta = target - current;
+		delta.X += (delta.X > PI-EPSILON) ? -PI_TWO+2*EPSILON : (delta.X < -PI+EPSILON) ? PI_TWO-2*EPSILON : 0f;
+		delta.Y += (delta.Y > PI-EPSILON) ? -PI_TWO+2*EPSILON : (delta.Y < -PI+EPSILON) ? PI_TWO-2*EPSILON : 0f;
+		delta.Z += (delta.Z > PI-EPSILON) ? -PI_TWO+2*EPSILON : (delta.Z < -PI+EPSILON) ? PI_TWO-2*EPSILON : 0f;
+		return delta;
 	}
 
 	#endregion
@@ -383,11 +459,11 @@ public class SpringDamperF : SpringDamper
 		var w = stiffSqrt * Mathy.PI_TWO;
 		var wInv = stiffSqrtInv * Mathy.PI_INV * 0.5f;
 
-		if (w < Mathy.SMALL_NUMBER)
+		if (w < Mathy.EPSILON)
 		{
 			Stepper = new DampStepperSmallW(damping, stiffSqrt, stiffSqrtInv, w, wInv);
 		}
-		else if (damping < Mathy.SMALL_NUMBER)
+		else if (damping < Mathy.EPSILON)
 		{
 			Stepper = new DampStepperSmallDamping(damping, stiffSqrt, stiffSqrtInv, w, wInv);
 		}
@@ -419,6 +495,22 @@ public class SpringDamperF : SpringDamper
 
 		Stepper.Step(ref current, ref currentVel, target, targetVel, deltaTime);
     }
+
+	public void StepRad(
+        ref float current,
+        ref float currentVel,
+        float target,
+        float targetVel,
+        float deltaTime)
+    {
+        if (deltaTime <= 0.0f)
+		{
+			return;
+		}
+
+		target = current + Mathy.DeltaRad(current, target);
+		Stepper.Step(ref current, ref currentVel, target, targetVel, deltaTime);
+    }
 }
 
 public class SpringDamperV2 : SpringDamper
@@ -433,11 +525,11 @@ public class SpringDamperV2 : SpringDamper
 
 		for (int i = 0; i < Steppers.Length; ++i)
 		{
-			if (w[i] < Mathy.SMALL_NUMBER)
+			if (w[i] < Mathy.EPSILON)
 			{
 				Steppers[i] = new DampStepperSmallW(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
 			}
-			else if (damping[i] < Mathy.SMALL_NUMBER)
+			else if (damping[i] < Mathy.EPSILON)
 			{
 				Steppers[i] = new DampStepperSmallDamping(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
 			}
@@ -471,6 +563,23 @@ public class SpringDamperV2 : SpringDamper
 		Steppers[0].Step(ref current.X, ref currentVel.X, target.X, targetVel.X, deltaTime);
 		Steppers[1].Step(ref current.Y, ref currentVel.Y, target.Y, targetVel.Y, deltaTime);
     }
+
+	public void StepRad(
+        ref Vector2 current,
+        ref Vector2 currentVel,
+        Vector2 target,
+        Vector2 targetVel,
+        float deltaTime)
+    {
+        if (deltaTime <= 0.0f)
+		{
+			return;
+		}
+
+		target = current + Mathy.DeltaRad(current, target);
+		Steppers[0].Step(ref current.X, ref currentVel.X, target.X, targetVel.X, deltaTime);
+		Steppers[1].Step(ref current.Y, ref currentVel.Y, target.Y, targetVel.Y, deltaTime);
+    }
 }
 
 public class SpringDamperV3 : SpringDamper
@@ -485,11 +594,11 @@ public class SpringDamperV3 : SpringDamper
 
 		for (int i = 0; i < Steppers.Length; ++i)
 		{
-			if (w[i] < Mathy.SMALL_NUMBER)
+			if (w[i] < Mathy.EPSILON)
 			{
 				Steppers[i] = new DampStepperSmallW(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
 			}
-			else if (damping[i] < Mathy.SMALL_NUMBER)
+			else if (damping[i] < Mathy.EPSILON)
 			{
 				Steppers[i] = new DampStepperSmallDamping(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
 			}
@@ -523,6 +632,78 @@ public class SpringDamperV3 : SpringDamper
 		Steppers[0].Step(ref current.X, ref currentVel.X, target.X, targetVel.X, deltaTime);
 		Steppers[1].Step(ref current.Y, ref currentVel.Y, target.Y, targetVel.Y, deltaTime);
 		Steppers[2].Step(ref current.Z, ref currentVel.Z, target.Z, targetVel.Z, deltaTime);
+    }
+
+	public void StepRad(
+        ref Vector3 current,
+        ref Vector3 currentVel,
+        Vector3 target,
+        Vector3 targetVel,
+        float deltaTime)
+    {
+        if (deltaTime <= 0.0f)
+		{
+			return;
+		}
+
+		target = current + Mathy.DeltaRad(current, target);
+		Steppers[0].Step(ref current.X, ref currentVel.X, target.X, targetVel.X, deltaTime);
+		Steppers[1].Step(ref current.Y, ref currentVel.Y, target.Y, targetVel.Y, deltaTime);
+		Steppers[2].Step(ref current.Z, ref currentVel.Z, target.Z, targetVel.Z, deltaTime);
+    }
+}
+
+public class SpringDamperQuat : SpringDamper
+{
+	protected DampStepper[] Steppers = new DampStepper[4];
+	public SpringDamperQuat(Quaternion damping, Quaternion stiff)
+	{
+		var stiffSqrt = Mathy.Sqrt(stiff);
+		var stiffSqrtInv = new Quaternion(1f / stiff.X, 1f / stiff.Y, 1f / stiff.Z, 1f / stiff.W);
+		var w = stiffSqrt * Mathy.PI_TWO;
+		var wInv = stiffSqrtInv * Mathy.PI_INV * 0.5f;
+
+		for (int i = 0; i < Steppers.Length; ++i)
+		{
+			if (w[i] < Mathy.EPSILON)
+			{
+				Steppers[i] = new DampStepperSmallW(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] < Mathy.EPSILON)
+			{
+				Steppers[i] = new DampStepperSmallDamping(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] > 1.0f)
+			{
+				Steppers[i] = new DampStepperOverDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else if (damping[i] < 1.0f)
+			{
+				Steppers[i] = new DampStepperUnderDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+			else // damping == 1.0f
+			{
+				Steppers[i] = new DampStepperCriticalDamp(damping[i], stiffSqrt[i], stiffSqrtInv[i], w[i], wInv[i]);
+			}
+		}
+	}
+
+	public void Step(
+        ref Quaternion current,
+        ref Quaternion currentVel,
+        Quaternion target,
+        Quaternion targetVel,
+        float deltaTime)
+    {
+        if (deltaTime <= 0.0f)
+		{
+			return;
+		}
+
+		Steppers[0].Step(ref current.X, ref currentVel.X, target.X, targetVel.X, deltaTime);
+		Steppers[1].Step(ref current.Y, ref currentVel.Y, target.Y, targetVel.Y, deltaTime);
+		Steppers[2].Step(ref current.Z, ref currentVel.Z, target.Z, targetVel.Z, deltaTime);
+		Steppers[3].Step(ref current.W, ref currentVel.W, target.W, targetVel.W, deltaTime);
     }
 }
 

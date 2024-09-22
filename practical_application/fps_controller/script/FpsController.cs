@@ -15,10 +15,10 @@ public partial class FpsController : CharacterBody3D
     [Export] protected float ForwardRatio = 1.25f;
     [Export] protected float BackwardRatio = 0.75f;
     [Export] protected float JumpVelocity = 5.0f;
-    [Export] public PhysicsBody3D CamJointTarget { get; protected set; }
+    // [Export] public PhysicsBody3D CamJointTarget { get; protected set; }
     
     protected Node3D Neck;
-    protected Node3D Head;
+    public Node3D Head { get; protected set; }
     protected Vector3 Vel;
     protected float Gravity;
     protected RigidBody3D BobCamBody;
@@ -26,7 +26,7 @@ public partial class FpsController : CharacterBody3D
     public override void _Ready()
     {
         Neck = GetNodeOrNull<Node3D>("Neck");
-        Head = GetNodeOrNull<Node3D>("Neck/Head");
+        Head = GetNode<Node3D>("Neck/Head");
         BobCamBody = GetNodeOrNull<RigidBody3D>("BobCamBody");
 
         Input.MouseMode = Input.MouseModeEnum.Captured;

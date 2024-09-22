@@ -6,15 +6,18 @@ namespace LGWCP.WorkField.FpsController;
 
 public partial class CameraManager : Node
 {
-    [Export] public FpsController FpsController;
-    protected PhysicsBody3D BobCamRigid;
-    protected Generic6DofJoint3D BobCamJoint;
-
-    protected PhysicsBody3D BobCamJointTarget;
+    [Export] public FpsController Player;
+    protected Node3D Head;
     protected Vector3 CamDampPosVel = new();
-    protected Vector3 CamDampRotVel = new();
+    protected Quaternion CamDampRotVel = new();
     protected Camera3D BobCam;
     protected SpringDamperV3 SD3Pos;
+    protected SpringDamperQuat SDQRot;
+    protected SpringDamperF SDRotX;
+    protected SpringDamperF SDRotY;
+    protected float RotXVel;
+    protected float RotYVel;
+
 
     public override void _Ready()
     {
@@ -23,57 +26,65 @@ public partial class CameraManager : Node
         SD3Pos = new SpringDamperV3(
             new Vector3(0.5f, 0.5f, 0.5f),
             new Vector3(16f, 16f, 16f));
+        SDQRot = new SpringDamperQuat(
+            new Quaternion(0.5f, 0.5f, 0.5f, 0.5f),
+            new Quaternion(16f, 16f, 16f, 16f));
+        SDRotX = new SpringDamperF(0.5f, 16f);
+        SDRotY = new SpringDamperF(0.5f, 16f);
     }
 
     public override void _PhysicsProcess(double delta)
     {
         float deltaTime = (float)delta;
-        // GD.Print(BobCamJoint.GlobalPosition);
         
-        var currentPos = new Vector3(
-            BobCam.GlobalPosition.X,
-            BobCam.GlobalPosition.Y,
-            BobCam.GlobalPosition.Z);
-
-        /*
-        Mathy.SpringDamp(
-            ref currentPos.Y,
-            ref CamDampVel.Y,
-            BobCamJointTarget.GlobalPosition.Y,
-            0f,
-            0.5f,
-            4f, 0.25f,
-            deltaTime);
-        */
+        var currentPos = BobCam.Position;
+        var targetPos = Head.GlobalPosition;
+        
+        var currentRot = BobCam.Quaternion;
+        var targetRot = Player.Quaternion * Head.Quaternion;
+        // GD.Print(targetRot);
         
         SD3Pos.Step(
             ref currentPos,
             ref CamDampPosVel,
-            BobCamJointTarget.GlobalPosition,
-            FpsController.Velocity, // 0f,
+            targetPos,
+            Player.Velocity, // 0f,
             deltaTime);
 
-        BobCam.GlobalPosition = currentPos;
-        GD.Print(FpsController.Quaternion);
-    }
+        SDQRot.Step(
+            ref currentRot,
+            ref CamDampRotVel,
+            targetRot,
+            Mathy.QuaternionZero, // 0f,
+            deltaTime);
 
-    protected void ConfigBobCamJoint()
-    {
-        BobCamRigid = GetNodeOrNull<PhysicsBody3D>("BobCamRigid");
-        BobCamJoint = GetNodeOrNull<Generic6DofJoint3D>("BobCamJoint");
+        BobCam.Position = currentPos;
+        // BobCam.Quaternion = currentRot;
 
-        BobCamJointTarget = FpsController.CamJointTarget;
-        BobCamRigid.GlobalPosition = BobCamJointTarget.GlobalPosition;
-        BobCamJoint.GlobalPosition = BobCamJointTarget.GlobalPosition;
-        BobCamJoint.NodeA = BobCamJoint.GetPathTo(BobCamRigid);
-        BobCamJoint.NodeB = BobCamJoint.GetPathTo(BobCamJointTarget);
+
+        float rotX = BobCam.Rotation.X;
+        float rotY = BobCam.Rotation.Y;
+        Mathy.RotModifierRad(ref rotY);
+        SDRotX.StepRad(
+            ref rotX,
+            ref RotXVel,
+            Head.Rotation.X,
+            0f,
+            deltaTime);
+        SDRotY.StepRad(
+            ref rotY,
+            ref RotYVel,
+            Player.Rotation.Y,
+            0f,
+            deltaTime);
+        BobCam.Rotation = new Vector3(rotX, rotY, BobCam.Rotation.Z);
     }
 
     protected void ConfigBobCamCustomDamp()
     {
         BobCam = GetNodeOrNull<Camera3D>("BobCam");
-        BobCamJointTarget = FpsController.CamJointTarget;
+        Head = Player.Head;
         CamDampPosVel = new Vector3();
-        BobCam.GlobalPosition = BobCamJointTarget.GlobalPosition;
+        BobCam.Position = Head.GlobalPosition;
     }
 }
