@@ -64,3 +64,4 @@ Player = NodePath("../FpsController")
 [node name="BobCam" type="Camera3D" parent="CameraManager"]
 top_level = true
 current = true
+fov = 45.0
