@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using LGWCP.StatechartSharp;
+using LGWCP.Godot.StatechartSharp;
 
 public partial class TestStatechartDuctFree : Node
 {

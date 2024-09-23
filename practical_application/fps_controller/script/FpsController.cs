@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using LGWCP.StatechartSharp;
+using LGWCP.Godot.StatechartSharp;
 using LGWCP.Godot.Util.Mathy;
 
 namespace LGWCP.WorkField.FpsController;
