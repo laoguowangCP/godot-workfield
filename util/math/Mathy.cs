@@ -17,17 +17,9 @@ Math lib dedicated for godot. Helper functions for vector, and many fastapprox a
 public class Mathy
 {
 	#region FastApprox
+
+	// Aligned with godot math
 	public const float EPSILON = 1e-6f;
-	/*
-	public const float PI = 3.1415926535897932f;
-	public const float PI_INV = 0.3183098861837907f;
-	public const float PI_HALF = 1.5707963267948966f;
-	public const float PI_TWO = 6.283185307179586f;
-	public const float PI_SQ = 9.869604401089358f;
-	public const float PI_SQ_INV = 0.10132118364233778f;
-	public const float PI_SQRT = 1.7724538509055159f;
-	public const float PI_SQRT_INV = 0.5641895835477563f;
-	*/
 	public const float PI = Mathf.Pi;
 	public const float PI_INV = 1f / PI;
 	public const float PI_HALF = PI / 2f;
@@ -516,7 +508,7 @@ public class SpringDamperF : SpringDamper
 public class SpringDamperV2 : SpringDamper
 {
 	protected DampStepper[] Steppers = new DampStepper[2];
-	public SpringDamperV2(Vector2 damping, Vector2 stiff)
+	public SpringDamperV2(in Vector2 damping, in Vector2 stiff)
 	{
 		var stiffSqrt = Mathy.Sqrt(stiff);
 		var stiffSqrtInv = Vector2.One / stiff;
@@ -585,7 +577,7 @@ public class SpringDamperV2 : SpringDamper
 public class SpringDamperV3 : SpringDamper
 {
 	protected DampStepper[] Steppers = new DampStepper[3];
-	public SpringDamperV3(Vector3 damping, Vector3 stiff)
+	public SpringDamperV3(in Vector3 damping, in Vector3 stiff)
 	{
 		var stiffSqrt = Mathy.Sqrt(stiff);
 		var stiffSqrtInv = Vector3.One / stiff;
@@ -653,6 +645,10 @@ public class SpringDamperV3 : SpringDamper
     }
 }
 
+/*
+/// <summary>
+/// Rotation repeat not implemented.
+/// </summary>
 public class SpringDamperQuat : SpringDamper
 {
 	protected DampStepper[] Steppers = new DampStepper[4];
@@ -706,6 +702,6 @@ public class SpringDamperQuat : SpringDamper
 		Steppers[3].Step(ref current.W, ref currentVel.W, target.W, targetVel.W, deltaTime);
     }
 }
-
+*/
 
 #endregion

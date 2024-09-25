@@ -17,7 +17,6 @@ public partial class FpsController : CharacterBody3D
     [Export] protected float JumpVelocity = 5.0f;
     // [Export] public PhysicsBody3D CamJointTarget { get; protected set; }
     
-    protected Node3D Neck;
     public Node3D Head { get; protected set; }
     protected Vector3 Vel;
     protected float Gravity;
@@ -25,8 +24,7 @@ public partial class FpsController : CharacterBody3D
 
     public override void _Ready()
     {
-        Neck = GetNodeOrNull<Node3D>("Neck");
-        Head = GetNode<Node3D>("Neck/Head");
+        Head = GetNodeOrNull<Node3D>("Head");
         BobCamBody = GetNodeOrNull<RigidBody3D>("BobCamBody");
 
         Input.MouseMode = Input.MouseModeEnum.Captured;

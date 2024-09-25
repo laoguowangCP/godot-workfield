@@ -12,7 +12,6 @@ public partial class CameraManager : Node
     protected Quaternion CamDampRotVel = new();
     protected Camera3D BobCam;
     protected SpringDamperV3 SD3Pos;
-    protected SpringDamperQuat SDQRot;
     protected SpringDamperF SDRotX;
     protected SpringDamperF SDRotY;
     protected float RotXVel;
@@ -24,13 +23,10 @@ public partial class CameraManager : Node
         // ConfigBobCamJoint();
         ConfigBobCamCustomDamp();
         SD3Pos = new SpringDamperV3(
-            new Vector3(0.5f, 0.5f, 0.5f),
+            new Vector3(0.4f, 0.4f, 0.4f),
             new Vector3(16f, 16f, 16f));
-        SDQRot = new SpringDamperQuat(
-            new Quaternion(0.5f, 0.5f, 0.5f, 0.5f),
-            new Quaternion(16f, 16f, 16f, 16f));
-        SDRotX = new SpringDamperF(0.5f, 16f);
-        SDRotY = new SpringDamperF(0.5f, 16f);
+        SDRotX = new SpringDamperF(0.6f, 16f);
+        SDRotY = new SpringDamperF(0.6f, 16f);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -49,13 +45,6 @@ public partial class CameraManager : Node
             ref CamDampPosVel,
             targetPos,
             Player.Velocity, // 0f,
-            deltaTime);
-
-        SDQRot.Step(
-            ref currentRot,
-            ref CamDampRotVel,
-            targetRot,
-            Mathy.QuaternionZero, // 0f,
             deltaTime);
 
         BobCam.Position = currentPos;

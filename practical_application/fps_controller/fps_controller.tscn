@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck6wsop787uon"]
+[gd_scene load_steps=10 format=3 uid="uid://ck6wsop787uon"]
 
 [ext_resource type="Script" path="res://practical_application/fps_controller/script/TestStatechartDuctFree.cs" id="1_odd5a"]
 [ext_resource type="Script" path="res://practical_application/fps_controller/script/FpsController.cs" id="1_ug2ur"]
+[ext_resource type="Script" path="res://practical_application/fps_controller/Hand.cs" id="2_6ebrk"]
 [ext_resource type="Script" path="res://addons/statechart_sharp/node/Statechart.cs" id="3_3rahj"]
 [ext_resource type="Script" path="res://addons/statechart_sharp/node/State.cs" id="4_pkbqc"]
 [ext_resource type="Script" path="res://addons/statechart_sharp/node/Reaction.cs" id="5_e7abo"]
+[ext_resource type="Texture2D" uid="uid://bxouvxpqhe40h" path="res://addons/statechart_sharp/icon/Reaction.svg" id="7_r7by8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_avovv"]
 radius = 0.4
@@ -16,15 +18,16 @@ length = 0.21
 [node name="FpsController" type="CharacterBody3D"]
 script = ExtResource("1_ug2ur")
 
-[node name="Neck" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Head" type="Node3D" parent="Neck"]
-
-[node name="SteadyCam" type="Camera3D" parent="Neck/Head"]
+[node name="SteadyCam" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 current = true
 fov = 45.0
+
+[node name="RightHand" type="Node3D" parent="Head"]
+script = ExtResource("2_6ebrk")
 
 [node name="BodyShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
@@ -61,6 +64,26 @@ CustomEventName = &""
 [node name="TestStatechartDuctFree" type="Node" parent="."]
 process_mode = 4
 script = ExtResource("1_odd5a")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_r7by8")
 
 [connection signal="Invoke" from="Statechart/Root/View/Reaction" to="." method="RI_ViewRotate"]
 [connection signal="Invoke" from="Statechart/Root/Walk/Reaction" to="." method="RI_StandWalk"]
