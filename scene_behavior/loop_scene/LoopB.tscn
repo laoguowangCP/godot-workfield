@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt33eyvbq05dp"]
+
+[ext_resource type="PackedScene" uid="uid://btp0cgr23bfe7" path="res://scene_behavior/loop_scene/LoopC.tscn" id="1_wrgia"]
+
+[node name="LoopB" type="Node"]
+
+[node name="LoopC" parent="." instance=ExtResource("1_wrgia")]
