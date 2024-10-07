@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx0iso5q807a1"]
+[gd_scene load_steps=8 format=3 uid="uid://bx0iso5q807a1"]
 
 [ext_resource type="PackedScene" uid="uid://ck6wsop787uon" path="res://practical_application/fps_controller/fps_controller.tscn" id="1_iud0o"]
 [ext_resource type="Material" uid="uid://c70asd0ua6snx" path="res://practical_application/fps_controller/material/block_basic_tex_triplanar.tres" id="2_8odmm"]
@@ -17,6 +17,9 @@ ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 sdfgi_read_sky_light = false
 sdfgi_y_scale = 2
+
+[sub_resource type="Compositor" id="Compositor_a3ey7"]
+compositor_effects = Array[CompositorEffect]([null])
 
 [node name="FpsField" type="Node3D"]
 
@@ -63,5 +66,6 @@ Player = NodePath("../FpsController")
 
 [node name="BobCam" type="Camera3D" parent="CameraManager"]
 top_level = true
+compositor = SubResource("Compositor_a3ey7")
 current = true
 fov = 45.0
