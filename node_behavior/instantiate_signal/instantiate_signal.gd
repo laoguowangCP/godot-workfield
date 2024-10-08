@@ -5,11 +5,11 @@ var s : PackedScene = preload("res://node_behavior/instantiate_signal/to_be_inst
 
 
 func _init():
-    pass
+	pass
 
 func _ready():
-    var x = s.instantiate()
-    var x_array = []
-    x_array.append(x)
-    var y = x_array[0].duplicate(1)
-    self.add_child(y)
+	var x = s.instantiate()
+	var x_array = []
+	x_array.append(x)
+	var y = x_array[0].duplicate(1)
+	self.add_child(y)
