@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://bbysh0lfe7ydc"]
 
-[ext_resource type="Script" path="res://audio/audio_stream_player/test_audio_stream_player.gd" id="1_81wvq"]
+[ext_resource type="Script" path="res://ui&input/spin_box_change/test_audio_stream_player.gd" id="1_wjc87"]
 
-[node name="AudioStreamPlayer" type="Control"]
+[node name="TestSpinBoxChange" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_81wvq")
+script = ExtResource("1_wjc87")
 
 [node name="SpinBox" type="SpinBox" parent="."]
 layout_mode = 0
