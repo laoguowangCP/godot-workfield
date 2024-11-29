@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3 uid="uid://tj46ho2iw5pj"]
+
+[ext_resource type="Script" path="res://physics/area_inside_enter/AreaInsideEnter2D.cs" id="1_wdtos"]
+[ext_resource type="PackedScene" uid="uid://bdbcfd4wtj42c" path="res://physics/area_inside_enter/area_inside_2d.tscn" id="2_ldd2g"]
+[ext_resource type="PackedScene" uid="uid://dfnlw7hluy8q3" path="res://physics/area_inside_enter/static_inside_2d.tscn" id="3_2os4e"]
+[ext_resource type="PackedScene" uid="uid://c436x328nueq1" path="res://physics/area_inside_enter/cb_inside_2d.tscn" id="4_600cd"]
+[ext_resource type="PackedScene" uid="uid://rmoehyq6d2ik" path="res://physics/area_inside_enter/rigid_inside_2d.tscn" id="5_1lolq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70c6h"]
+radius = 256.0
+
+[node name="AreaInsideEnter2D" type="Node2D"]
+script = ExtResource("1_wdtos")
+AreaInsidePS = ExtResource("2_ldd2g")
+StaticInsidePS = ExtResource("3_2os4e")
+CBInsidePS = ExtResource("4_600cd")
+RigidInsidePS = ExtResource("5_1lolq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_70c6h")
