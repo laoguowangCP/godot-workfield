@@ -23,6 +23,10 @@ project/assembly_name="Playground"
 
 enabled=PackedStringArray("res://addons/statechart_sharp/plugin.cfg")
 
+[global_group]
+
+GlobalGroupA=""
+
 [input]
 
 ShiftScrollUp={
