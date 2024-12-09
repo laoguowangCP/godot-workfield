@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bfuy1godim3a3"]
+
+[ext_resource type="Shader" path="res://practical_application/wet_stockings/shader/dip_dye.gdshader" id="1_ct0c6"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ct0c6")
+shader_parameter/water_height_global = null
+shader_parameter/dip_color = Color(0, 0.737255, 0, 1)

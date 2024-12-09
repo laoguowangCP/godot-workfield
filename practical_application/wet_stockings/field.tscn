@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhjc510o572xc"]
+
+[ext_resource type="Material" uid="uid://bfuy1godim3a3" path="res://practical_application/wet_stockings/shader/dip_dye_mat.tres" id="1_5dks5"]
+[ext_resource type="Script" path="res://practical_application/wet_stockings/script/Spinner3D.cs" id="2_ljal0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3vd8u"]
+
+[sub_resource type="Sky" id="Sky_plpx4"]
+sky_material = SubResource("ProceduralSkyMaterial_3vd8u")
+
+[sub_resource type="Environment" id="Environment_h63e2"]
+background_mode = 2
+sky = SubResource("Sky_plpx4")
+
+[node name="Field" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h63e2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, -0.353553, 0.5, 0.612372, 0.612372, 0, -0.707107, 0.707107, 0, 5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+fov = 45.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.266266, 0)
+material = ExtResource("1_5dks5")
+
+[node name="Spinner" type="Node" parent="CSGCylinder3D"]
+script = ExtResource("2_ljal0")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+material = ExtResource("1_5dks5")
+
+[node name="Spinner" type="Node" parent="CSGBox3D"]
+script = ExtResource("2_ljal0")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+transform = Transform3D(0.883676, 0.4681, 0, -0.374209, 0.70643, -0.600769, -0.28122, 0.530885, 0.799423, -2, 0, 0)
+material = ExtResource("1_5dks5")
+
+[node name="Spinner" type="Node" parent="CSGTorus3D"]
+script = ExtResource("2_ljal0")
