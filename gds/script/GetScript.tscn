@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdr08dv0s6qhm"]
+
+[ext_resource type="Script" path="res://gds/script/get_script.gd" id="1_u88ao"]
+[ext_resource type="Script" path="res://gds/script/foo.gd" id="2_kx3ho"]
+
+[node name="GetScript" type="Node"]
+script = ExtResource("1_u88ao")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_kx3ho")
