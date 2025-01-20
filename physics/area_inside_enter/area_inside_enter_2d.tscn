@@ -9,7 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_70c6h"]
 radius = 256.0
 
-[node name="AreaInsideEnter2D" type="Node2D"]
+[node name="AreaInsideEnter2D" type="Node2D" groups=["GlobalGroupA"]]
 script = ExtResource("1_wdtos")
 AreaInsidePS = ExtResource("2_ldd2g")
 StaticInsidePS = ExtResource("3_2os4e")
