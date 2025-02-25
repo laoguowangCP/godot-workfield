@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck6wsop787uon"]
+[gd_scene load_steps=9 format=3 uid="uid://ck6wsop787uon"]
 
-[ext_resource type="Script" path="res://practical_application/fps_controller/script/TestStatechartDuctFree.cs" id="1_odd5a"]
 [ext_resource type="Script" path="res://practical_application/fps_controller/script/FpsController.cs" id="1_ug2ur"]
 [ext_resource type="Script" path="res://practical_application/fps_controller/Hand.cs" id="2_6ebrk"]
 [ext_resource type="Script" path="res://addons/statechart_sharp/node/Statechart.cs" id="3_3rahj"]
@@ -60,10 +59,6 @@ script = ExtResource("4_pkbqc")
 script = ExtResource("5_e7abo")
 ReactionEvent = 1
 CustomEventName = &""
-
-[node name="TestStatechartDuctFree" type="Node" parent="."]
-process_mode = 4
-script = ExtResource("1_odd5a")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
