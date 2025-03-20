@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ck6wsop787uon" path="res://practical_application/fps_controller/fps_controller.tscn" id="1_iud0o"]
 [ext_resource type="Material" uid="uid://c70asd0ua6snx" path="res://practical_application/fps_controller/material/block_basic_tex_triplanar.tres" id="2_8odmm"]
-[ext_resource type="Script" path="res://practical_application/fps_controller/script/CameraManager.cs" id="3_6wr2p"]
+[ext_resource type="Script" uid="uid://cj0i54r5hq0ru" path="res://practical_application/fps_controller/script/CameraManager.cs" id="3_6wr2p"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_m303o"]
 

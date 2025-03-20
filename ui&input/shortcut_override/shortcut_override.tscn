@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb4101b5nr1wc"]
 
-[ext_resource type="Script" path="res://ui&input/shortcut_override/ShiftScrollUp.cs" id="1_jkdxj"]
-[ext_resource type="Script" path="res://ui&input/shortcut_override/ScrollUp.cs" id="2_k13ss"]
+[ext_resource type="Script" uid="uid://dfkdy22e61icy" path="res://ui&input/shortcut_override/ShiftScrollUp.cs" id="1_jkdxj"]
+[ext_resource type="Script" uid="uid://c3alx5f2b8qtu" path="res://ui&input/shortcut_override/ScrollUp.cs" id="2_k13ss"]
 
 [node name="ShortcutOverride" type="Node2D"]
 

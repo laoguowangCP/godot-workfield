@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://tj46ho2iw5pj"]
 
-[ext_resource type="Script" path="res://physics/area_inside_enter/AreaInsideEnter2D.cs" id="1_wdtos"]
+[ext_resource type="Script" uid="uid://b2xqidqof2ysw" path="res://physics/area_inside_enter/AreaInsideEnter2D.cs" id="1_wdtos"]
 [ext_resource type="PackedScene" uid="uid://bdbcfd4wtj42c" path="res://physics/area_inside_enter/area_inside_2d.tscn" id="2_ldd2g"]
 [ext_resource type="PackedScene" uid="uid://dfnlw7hluy8q3" path="res://physics/area_inside_enter/static_inside_2d.tscn" id="3_2os4e"]
 [ext_resource type="PackedScene" uid="uid://c436x328nueq1" path="res://physics/area_inside_enter/cb_inside_2d.tscn" id="4_600cd"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7u8cknjxbqpq"]
 
-[ext_resource type="Script" path="res://reference_behavior/weak_ref/test_weak_ref.gd" id="1_ygw27"]
+[ext_resource type="Script" uid="uid://dhao6vrlntck6" path="res://reference_behavior/weak_ref/test_weak_ref.gd" id="1_ygw27"]
 
 [node name="TestWeakRef" type="Node"]
 script = ExtResource("1_ygw27")

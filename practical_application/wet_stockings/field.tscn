@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bhjc510o572xc"]
 
 [ext_resource type="Material" uid="uid://bfuy1godim3a3" path="res://practical_application/wet_stockings/shader/dip_dye_mat.tres" id="1_5dks5"]
-[ext_resource type="Script" path="res://practical_application/wet_stockings/script/Spinner3D.cs" id="2_ljal0"]
+[ext_resource type="Script" uid="uid://85ddniq82gys" path="res://practical_application/wet_stockings/script/Spinner3D.cs" id="2_ljal0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3vd8u"]
 

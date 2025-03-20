@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c1hfc6e76gfnm"]
 
-[ext_resource type="Script" path="res://godot_csharp/dict_json/TestDictJson.cs" id="1_ivefr"]
+[ext_resource type="Script" uid="uid://ctkau6abd2nuk" path="res://godot_csharp/dict_json/TestDictJson.cs" id="1_ivefr"]
 
 [node name="TestDictJson" type="Node"]
 script = ExtResource("1_ivefr")

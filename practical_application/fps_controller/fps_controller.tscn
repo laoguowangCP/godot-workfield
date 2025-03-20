@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://ck6wsop787uon"]
 
-[ext_resource type="Script" path="res://practical_application/fps_controller/script/FpsController.cs" id="1_ug2ur"]
-[ext_resource type="Script" path="res://practical_application/fps_controller/Hand.cs" id="2_6ebrk"]
-[ext_resource type="Script" path="res://addons/statechart_sharp/node/Statechart.cs" id="3_3rahj"]
-[ext_resource type="Script" path="res://addons/statechart_sharp/node/State.cs" id="4_pkbqc"]
-[ext_resource type="Script" path="res://addons/statechart_sharp/node/Reaction.cs" id="5_e7abo"]
+[ext_resource type="Script" uid="uid://cudnhfre2bhsc" path="res://practical_application/fps_controller/script/FpsController.cs" id="1_ug2ur"]
+[ext_resource type="Script" uid="uid://ky03ykbk2ugd" path="res://practical_application/fps_controller/Hand.cs" id="2_6ebrk"]
+[ext_resource type="Script" uid="uid://b5fna6wn7ypm6" path="res://addons/statechart_sharp/node/Statechart.cs" id="3_3rahj"]
+[ext_resource type="Script" uid="uid://g8mncl0uqfll" path="res://addons/statechart_sharp/node/State.cs" id="4_pkbqc"]
+[ext_resource type="Script" uid="uid://batf7q2mfel8l" path="res://addons/statechart_sharp/node/Reaction.cs" id="5_e7abo"]
 [ext_resource type="Texture2D" uid="uid://bxouvxpqhe40h" path="res://addons/statechart_sharp/icon/Reaction.svg" id="7_r7by8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_avovv"]

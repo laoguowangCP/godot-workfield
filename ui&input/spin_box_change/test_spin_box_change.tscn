@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bbysh0lfe7ydc"]
 
-[ext_resource type="Script" path="res://ui&input/spin_box_change/test_audio_stream_player.gd" id="1_wjc87"]
+[ext_resource type="Script" uid="uid://qs3mhp0phqmx" path="res://ui&input/spin_box_change/test_audio_stream_player.gd" id="1_wjc87"]
 
 [node name="TestSpinBoxChange" type="Control"]
 layout_mode = 3
