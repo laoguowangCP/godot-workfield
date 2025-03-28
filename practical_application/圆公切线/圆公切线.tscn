@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://86n21dabyng8"]
+
+[ext_resource type="Script" uid="uid://devg4l6v64stk" path="res://practical_application/圆公切线/CircleCommonTangent.cs" id="1_b3e4k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lnhhm"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3e4k"]
+
+[node name="圆公切线" type="Node2D"]
+script = ExtResource("1_b3e4k")
+
+[node name="P1" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P1"]
+shape = SubResource("CircleShape2D_lnhhm")
+
+[node name="P2" type="CharacterBody2D" parent="."]
+position = Vector2(352, -228)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P2"]
+shape = SubResource("CircleShape2D_b3e4k")
+
+[node name="Line1" type="Line2D" parent="."]
+width = 2.0
+
+[node name="Line2" type="Line2D" parent="."]
+width = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
