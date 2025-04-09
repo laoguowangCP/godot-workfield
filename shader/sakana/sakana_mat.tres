@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bvjn35vjd0vck"]
+
+[ext_resource type="Shader" uid="uid://blt04mjwi6d1s" path="res://shader/sakana/sakana.gdshader" id="1_yn7x1"]
+
+[resource]
+shader = ExtResource("1_yn7x1")

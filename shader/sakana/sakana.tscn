@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://nsunmd73syjl"]
+
+[ext_resource type="Material" uid="uid://bvjn35vjd0vck" path="res://shader/sakana/sakana_mat.tres" id="1_capen"]
+[ext_resource type="Texture2D" uid="uid://bo6wt27flxowt" path="res://shader/sakana/sakana.png" id="2_3057o"]
+
+[node name="Sakana" type="Node2D"]
+position = Vector2(979, 542)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_capen")
+texture = ExtResource("2_3057o")
