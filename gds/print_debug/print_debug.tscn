@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh4fwa6lsjues"]
+
+[ext_resource type="Script" uid="uid://800cn33q8m14" path="res://gds/print_debug/print_debug.gd" id="1_hdli0"]
+
+[node name="PrintDebug" type="Node"]
+script = ExtResource("1_hdli0")
