@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://fx0q4vdrku70"]
+
+[ext_resource type="ArrayMesh" uid="uid://dxa8y3jpdq5ni" path="res://model/tree/2025-04-24_16-28-09.obj" id="1_st64j"]
+[ext_resource type="Texture2D" uid="uid://btnuultxesrcp" path="res://model/tree/bark2.png" id="2_y5g52"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqg71"]
+albedo_texture = ExtResource("2_y5g52")
+uv1_triplanar = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100586, 0.265137, 0.0178833)
+mesh = ExtResource("1_st64j")
+surface_material_override/0 = SubResource("StandardMaterial3D_dqg71")

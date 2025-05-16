@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqjojr435o1ex"]
+
+[ext_resource type="Script" uid="uid://crin6gck1xaet" path="res://gds/string_format/StringFormatCS.cs" id="1_d8kg4"]
+[ext_resource type="Script" uid="uid://co2m5olvlgabr" path="res://gds/string_format/StringFormat.gd" id="2_yp3sc"]
+
+[node name="StringFormat" type="Node"]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_d8kg4")
+
+[node name="Node2" type="Node" parent="."]
+script = ExtResource("2_yp3sc")
