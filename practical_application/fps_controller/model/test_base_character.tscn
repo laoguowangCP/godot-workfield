@@ -18,4 +18,6 @@ bone_idx = 6
 radius = 0.05
 material = SubResource("StandardMaterial3D_jlaim")
 
+[node name="LookAtModifier3D" type="LookAtModifier3D" parent="BaseCharacter/Armature/Skeleton3D" index="22"]
+
 [editable path="BaseCharacter"]
