@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx0iso5q807a1"]
+[gd_scene load_steps=9 format=3 uid="uid://bx0iso5q807a1"]
 
 [ext_resource type="PackedScene" uid="uid://ck6wsop787uon" path="res://practical_application/fps_controller/fps_controller.tscn" id="1_iud0o"]
 [ext_resource type="Material" uid="uid://c70asd0ua6snx" path="res://practical_application/fps_controller/material/block_basic_tex_triplanar.tres" id="2_8odmm"]
 [ext_resource type="Script" uid="uid://cj0i54r5hq0ru" path="res://practical_application/fps_controller/script/CameraManager.cs" id="3_6wr2p"]
+[ext_resource type="PackedScene" uid="uid://d0yuukry31qxq" path="res://practical_application/fps_controller/model/test_base_character.tscn" id="4_rv0jq"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_m303o"]
 
@@ -69,3 +70,6 @@ top_level = true
 compositor = SubResource("Compositor_a3ey7")
 current = true
 fov = 45.0
+
+[node name="TestBaseCharacter" parent="." instance=ExtResource("4_rv0jq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -6)

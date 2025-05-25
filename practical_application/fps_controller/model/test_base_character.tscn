@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0yuukry31qxq"]
+
+[ext_resource type="PackedScene" uid="uid://mbvddj2atk6b" path="res://practical_application/fps_controller/model/BaseCharacter.glb" id="1_jlaim"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlaim"]
+albedo_color = Color(0, 1, 0, 1)
+
+[node name="TestBaseCharacter" type="Node3D"]
+
+[node name="BaseCharacter" parent="." instance=ExtResource("1_jlaim")]
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="BaseCharacter/Armature/Skeleton3D" index="21"]
+transform = Transform3D(0, -1, 0, 2.8213e-07, 0, 1, -1, 0, 2.8213e-07, -0.85, 1.55, -0.03)
+bone_name = "finger_up.L"
+bone_idx = 6
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="BaseCharacter/Armature/Skeleton3D/BoneAttachment3D"]
+radius = 0.05
+material = SubResource("StandardMaterial3D_jlaim")
+
+[editable path="BaseCharacter"]
