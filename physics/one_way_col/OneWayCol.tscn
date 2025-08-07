@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://6a22yoqy3g7k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbssn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guqdx"]
+size = Vector2(100, 100)
+
+[node name="OneWayCol" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(0, -214)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+light_mask = 0
+shape = SubResource("CircleShape2D_tbssn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_guqdx")
+one_way_collision = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
