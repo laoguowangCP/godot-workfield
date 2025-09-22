@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dty1vr28qt41o"]
+
+[ext_resource type="Script" uid="uid://dgu4e4fk4kfon" path="res://scene_behavior/collection_is_not_unique/NodeHoldingCollection.cs" id="1_nctg4"]
+
+[node name="NodeHoldingCollection" type="Node"]
+script = ExtResource("1_nctg4")
+HoldingArray = Array[int]([0, 1])

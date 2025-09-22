@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://kjwhgs824kbe"]
+
+[ext_resource type="Script" uid="uid://bk8obiugsaort" path="res://scene_behavior/collection_is_not_unique/TestCollectionUnique.cs" id="1_gujem"]
+[ext_resource type="PackedScene" uid="uid://dty1vr28qt41o" path="res://scene_behavior/collection_is_not_unique/NodeHoldingCollection.tscn" id="2_st70v"]
+[ext_resource type="PackedScene" uid="uid://bfbqmbtmxokx7" path="res://scene_behavior/collection_is_not_unique/NodeHoldingResHoldingCollection.tscn" id="3_opute"]
+
+[node name="TestCollectionUnique" type="Node"]
+script = ExtResource("1_gujem")
+NodeHoldingCollectionScene = ExtResource("2_st70v")
+NodeHoldingResHoldingCollectionScene = ExtResource("3_opute")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfbqmbtmxokx7"]
+
+[ext_resource type="Script" uid="uid://c1kirkb6t2cam" path="res://scene_behavior/collection_is_not_unique/NodeHoldingResHoldingCollection.cs" id="1_fm74x"]
+[ext_resource type="Resource" uid="uid://bvy74gy4gj2ra" path="res://scene_behavior/collection_is_not_unique/ResHoldingCollection.tres" id="2_esx64"]
+
+[node name="NodeHoldingResHoldingCollection" type="Node"]
+script = ExtResource("1_fm74x")
+ResHoldingCollection = ExtResource("2_esx64")

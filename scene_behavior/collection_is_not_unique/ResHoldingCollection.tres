@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bvy74gy4gj2ra"]
+
+[ext_resource type="Script" uid="uid://q3cifehnxwmb" path="res://scene_behavior/collection_is_not_unique/ResHoldingCollection.cs" id="1_tmot7"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_tmot7")
+HoldingArray = Array[int]([0, 1])
