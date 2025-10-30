@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://clamkv4t44d4q"]
+
+[ext_resource type="Script" uid="uid://d10y85lwaivns" path="res://resource/packedscene_cyclic_ref/Dead.cs" id="1_loiei"]
+
+[node name="Dead" type="Node"]
+script = ExtResource("1_loiei")
+PlayPath = "res://resource/packedscene_cyclic_ref/Play.tscn"
